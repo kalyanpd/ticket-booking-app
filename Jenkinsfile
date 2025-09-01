@@ -23,7 +23,7 @@ pipeline {
                     sh 'docker rm -f ticket-booking || true'
                     
                     // Run new container
-                    sh 'docker run -d -p 5000:5000 --name ticket-booking ticket-booking-app:latest'
+                    sh 'docker run -d -p 5005:5000 --name ticket-booking ticket-booking-app:latest'
                 }
             }
         }

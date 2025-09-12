@@ -4,7 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = "kalyanpd/ticket-booking-app"   // Your DockerHub repo
 	DOCKER_USER = 'kalyan3599'
-        DOCKER_CREDENTIALS = "1234"                   // Jenkins credentials ID
+	DOCKER_CREDENTIALS = "1234"                   // Jenkins credentials ID
     }
 
     stages {
@@ -23,20 +23,19 @@ pipeline {
                 """
             }
         }
-
-        stage('Push to DockerHub') {
-            steps {
-                withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS}",
-                                                  usernameVariable: 'DOCKER_USER',
-                                                  passwordVariable: 'DOCKER_PASS')]) {
-                    sh """
-                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                        docker push ${DOCKER_IMAGE}:latest
-                        docker logout
-                    """
-                }
-            }
+	stage('Push to DockerHub') {
+	    steps {
+       		 withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS}",
+                                          usernameVariable: 'DOCKER_USER',
+                                          passwordVariable: 'DOCKER_PASS')]) {
+            	sh """
+                echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                docker push ${DOCKER_IMAGE}:latest
+                docker logout
+            """
         }
+    }
+}
 
         stage('Run Container') {
             steps {

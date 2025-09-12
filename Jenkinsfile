@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = "kalyanpd/ticket-booking-app"   // Replace with your DockerHub username/repo
+        DOCKER_IMAGE = "kalyanpd/ticket-booking-app"
+	DOCKER_USER = 'kalyan3599'   // Replace with your DockerHub username/repo
     }
 
     stages {
